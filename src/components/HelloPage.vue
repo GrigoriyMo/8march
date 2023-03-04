@@ -1,10 +1,12 @@
 
 <template>
   <div class="auth-wrapper" v-if="authOpened">
-    <div class="auth" >
+    <div class="auth">
       <input v-model="phone" type="text" />
-      <button v-on:click="authorize">Регистрация в подписке по номеру телефона</button>
-     <p> {{ errorMessage }}</p>
+      <button v-on:click="authorize">
+        Регистрация в подписке по номеру телефона
+      </button>
+      <p>{{ errorMessage }}</p>
     </div>
   </div>
   <ul class="partner-list">
@@ -31,8 +33,8 @@ export default {
   },
   data() {
     return {
-      errorMessage:"",
-      phone:"+7",
+      errorMessage: "",
+      phone: "+7",
       authOpened: true,
       partners: [
         {
@@ -78,37 +80,43 @@ export default {
           description: `Заведем новичка по подписке, заберем  долги`,
           descriptionDetailed:
             "Только с нашей подпиской, лучшие таблетки для медитации по СУПЕР цене, с бесплатной доставкой! Переходи на сайт партнера и воспользуйся предложением!",
-          color: `#F18B02`,
+          color: `#9448BC`,
         },
       ],
       partnersCount: 5,
     };
   },
-  methods:{
-    authorize(){
-      if(this.phone.length==12){
-        this.authOpened = false;
-      }else{
-        this.errorMessage = 'Пожалуйста введите номер телефона полностью в формате +79123456789'
-      }
-     
+  mounted: function () {
+    var phone = window.localStorage.getItem("phone");
+    if (phone) {
+      this.authOpened = false;
     }
-  }
+  },
+  methods: {
+    authorize() {
+      if (this.phone.length == 12) {
+        this.authOpened = false;
+        window.localStorage.setItem("phone", this.phone);
+      } else {
+        this.errorMessage =
+          "Пожалуйста введите номер телефона полностью в формате +79123456789";
+      }
+    },
+  },
 };
 </script>
 <style scoped>
-
-.auth-wrapper{
+.auth-wrapper {
   position: fixed;
-  top:0;
+  top: 0;
   left: 0;
   width: 100%;
-  height:100%;
-  display:flex;
+  height: 100%;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #62A56B;
+  background-color: #62a56b;
 }
 .auth {
   margin: 0 auto;

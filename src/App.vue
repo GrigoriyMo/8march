@@ -3,6 +3,7 @@ import HelloPage from './components/HelloPage.vue'
 </script>
 
 <template>
+  <h1>Точно нормальная подписка</h1>
   <HelloPage />
 </template>
 

@@ -28,16 +28,17 @@ export default {
     justify-content: space-evenly;
     width:250px;
     height: 400px;
-    background-color:#483AF0;
+    background-color:#F2D5F8;
     border-radius: 30px;
-    border:10px solid #753FD9;
+    border:10px solid #E6C0E9;
     margin:10px;
+    color:#8D89A6;
 }
 
 .partner-card-wrapper:hover{
     cursor: pointer;
     transform: scale(1.1);
-    border: 10px solid #483AF0;
+    border: 10px solid #BFABCB;
 }
 
 .partner-card-img{

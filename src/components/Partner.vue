@@ -1,5 +1,9 @@
 <template>
-  <div class="partner-card-wrapper" :style="{backgroundColor:color}" v-on:click="cardOpened = true">
+  <div
+    class="partner-card-wrapper"
+    :style="{ backgroundColor: color }"
+    v-on:click="cardOpened = true"
+  >
     <p class="partner-card-title">
       <b>{{ title }}</b>
     </p>
@@ -7,7 +11,7 @@
     <p class="partner-card-p">{{ description }}</p>
   </div>
   <div v-if="cardOpened" class="partner-card-detailed-wrapper">
-    <div class="partner-card-detailed">
+    <div class="partner-card-detailed" :style="{ backgroundColor: color }">
       <h2 class="partner-card-title">
         <b> Уникальное предложение: {{ title }}</b>
       </h2>
@@ -26,7 +30,7 @@ export default {
     title: String,
     description: String,
     descriptionDetailed: String,
-    color:String
+    color: String,
   },
   data() {
     return {
@@ -63,28 +67,28 @@ export default {
   margin: 0 auto;
 }
 
-
-.partner-card-detailed-wrapper{
-    width:100%;
-    height:100%;
-    position: fixed;
-    left:0;
-    top:0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-   
+.partner-card-detailed-wrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 .partner-card-detailed {
-    background-color: #f2efea;
-    width: 640px;
-    height: 80%;
-    color: #403d58;
+  border-radius: 30px;
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  width: 640px;
+  height: 60%;
+  color: #403d58;
 }
 
-.partner-card-img-detailed{
-    width: 150px;
+.partner-card-img-detailed {
+  width: 150px;
   height: 150px;
 }
 </style>

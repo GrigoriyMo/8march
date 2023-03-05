@@ -1,9 +1,11 @@
 
 <template>
+  <div class="main-wrapper">
+    <h1>Точно нормальная подписка</h1>
   <div class="auth-wrapper" v-if="authOpened">
     <div class="auth">
       <input v-model="phone" type="text" />
-      <button v-on:click="authorize">
+      <button v-on:click="authorize" class="authorize-button">
         Регистрация в подписке по номеру телефона
       </button>
       <p>{{ errorMessage }}</p>
@@ -20,6 +22,7 @@
       ></partnerCard>
     </li>
   </ul>
+  </div>
 </template>
 <script>
 import partnerCard from "./Partner.vue";
@@ -40,7 +43,7 @@ export default {
         {
           id: 1,
           name: `Таблетки для медитации "Натали+"`,
-          img: `ladybug.png`,
+          img: `leaf.png`,
           description: `Бесплатная доставка по подписке`,
           descriptionDetailed:
             "Только с нашей подпиской, лучшие таблетки для медитации по СУПЕР цене, с бесплатной доставкой! Переходи на сайт партнера и воспользуйся предложением!",
@@ -49,7 +52,7 @@ export default {
         {
           id: 2,
           name: `Канарские Уралы`,
-          img: `ladybug.png`,
+          img: `rainbow.png`,
           description: `Ветаптека и пиво для собак со скидкой 50%`,
           descriptionDetailed:
             "Только с нашей подпиской, лучшие таблетки для медитации по СУПЕР цене, с бесплатной доставкой! Переходи на сайт партнера и воспользуйся предложением!",
@@ -58,7 +61,7 @@ export default {
         {
           id: 3,
           name: `Корейский Эчпочмакико`,
-          img: `ladybug.png`,
+          img: `barbecue.png`,
           description: `Кэшбэк чак-чаком на 25% больше`,
           descriptionDetailed:
             "Только с нашей подпиской, лучшие таблетки для медитации по СУПЕР цене, с бесплатной доставкой! Переходи на сайт партнера и воспользуйся предложением!",
@@ -67,7 +70,7 @@ export default {
         {
           id: 4,
           name: `Ленинградский пассаж "Хоббит-СПБ"`,
-          img: `ladybug.png`,
+          img: `pamela.png`,
           description: `7 гномов в подарок по подписке при покупке штанов Гендальфа`,
           descriptionDetailed:
             "Только с нашей подпиской, лучшие таблетки для медитации по СУПЕР цене, с бесплатной доставкой! Переходи на сайт партнера и воспользуйся предложением!",
@@ -106,6 +109,15 @@ export default {
 };
 </script>
 <style scoped>
+
+.main-wrapper{
+  position: absolute;
+  left:0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background-color:#48919F ;
+}
 .auth-wrapper {
   position: fixed;
   top: 0;
@@ -116,14 +128,23 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #62a56b;
+  background-color: #7DB938;
+  background-image: url(public/welcome.png);
+  background-repeat: no-repeat;
+  background-position: top;
 }
+
 .auth {
   margin: 0 auto;
+  padding: 25px;
   width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.authorize-button{
+  color:#fff;
 }
 
 .partner-list {
@@ -134,4 +155,96 @@ export default {
 li {
   list-style-type: none;
 }
+
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color:#66D7D1;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.card {
+  padding: 2em;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
 </style>

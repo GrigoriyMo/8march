@@ -1,22 +1,18 @@
-<script setup>
-</script>
 
-<template>
-  <h1>Точно нормальная подписка</h1>
-  <router-view/>
+<template >
+ 
+  <router-view />
 </template>
+<script>
+import Index from "./components/HelloPage.vue";
+export default {
+  name: "Main",
+  components: {
+    index: Index,
+  }
+}
 
+</script>
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+
 </style>

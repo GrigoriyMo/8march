@@ -8,16 +8,21 @@
       <b>{{ title }}</b>
     </p>
     <img class="partner-card-img" :src="img" alt="" />
-    <p class="partner-card-p">{{ description }}</p>
+    <p class="partner-card-p partner-card-description">{{ description }}</p>
   </div>
   <div v-if="cardOpened" class="partner-card-detailed-wrapper">
     <div class="partner-card-detailed" :style="{ backgroundColor: color }">
       <h2 class="partner-card-title">
         <b> Уникальное предложение: {{ title }}</b>
       </h2>
-      <img class="partner-card-img-detailed" :src="img" alt="" />
-      <p class="partner-card-p">{{ description }}</p>
-      <p class="partner-card-p">{{ descriptionDetailed }}</p>
+      <div class="partner-card-opene-description">
+        <img class="partner-card-img-detailed" :src="img" alt="" />
+        <div class="partner-card-text-opened-block">
+          <p class="partner-card-p">{{ description }}</p>
+          <p class="partner-card-p">{{ descriptionDetailed }}</p>
+        </div>
+      </div>
+
       <button v-on:click="cardOpened = false">Закрыть</button>
     </div>
   </div>
@@ -45,9 +50,9 @@ export default {
   flex-direction: column;
   align-content: center;
   justify-content: space-evenly;
-  width: 250px;
-  height: 400px;
-
+  width: 200px;
+  height: 380px;
+  padding: 15px;
   background-color: #f2efea;
   border-radius: 30px;
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
@@ -78,6 +83,10 @@ export default {
   align-items: center;
   justify-content: space-evenly;
 }
+
+.partner-card-p {
+  color: #f2efea;
+}
 .partner-card-detailed {
   border-radius: 30px;
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
@@ -86,9 +95,17 @@ export default {
   height: 60%;
   color: #403d58;
 }
+.partner-card-text-opened-block{
+    padding-left: 15px;
+}
 
 .partner-card-img-detailed {
-  width: 150px;
-  height: 150px;
+  width: 135px;
+  height: 135px;
+}
+
+.partner-card-opene-description {
+  display: flex;
+  flex-direction: row;
 }
 </style>

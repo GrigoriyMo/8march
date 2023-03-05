@@ -20,6 +20,7 @@
         <div class="partner-card-text-opened-block">
           <p class="partner-card-p">{{ description }}</p>
           <p class="partner-card-p">{{ descriptionDetailed }}</p>
+          <span class="partner-link"> <b> <a v-bind:href="'partner/'+link"> Перейти на сайт партнера  </a> </b></span>
         </div>
       </div>
 
@@ -36,6 +37,7 @@ export default {
     description: String,
     descriptionDetailed: String,
     color: String,
+    link: String,
   },
   data() {
     return {
@@ -82,6 +84,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  
 }
 
 .partner-card-p {
@@ -94,6 +97,7 @@ export default {
   width: 640px;
   height: 60%;
   color: #403d58;
+  padding:15px;
 }
 .partner-card-text-opened-block{
     padding-left: 15px;
@@ -108,4 +112,15 @@ export default {
   display: flex;
   flex-direction: row;
 }
+
+.partner-link a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.partner-link a:visited{
+    text-decoration: none;
+    color: #fff;
+}
+
 </style>

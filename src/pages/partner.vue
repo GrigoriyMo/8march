@@ -13,6 +13,7 @@
       </div>
 
       <div class="quest partner" v-if="questOpenedOne">
+        <p style="font-size:20px">Архкомитет в самом разгаре. Артем покраснел от ярости и стучит по столу.</p>
         <img class="artem-photo" src="/person.jpg" />
         <button v-on:click="playSound" class="answer-button">
           Артем, ты не прав.
@@ -22,6 +23,7 @@
       </div>
 
       <div class="finish-quest-one" v-if="questOneCounter >= 3">
+        <p style="font-size:20px">Артем повержен, архкомитет - спасен</p>
         <img class="finish-img" v-on:click="goHome" src="/one.png" alt="" />
       </div>
     </div>
@@ -121,6 +123,7 @@ export default {
   width: 400px;
   height: 400px;
   margin: 0 auto;
+  object-fit: contain;
 }
 
 .partner {
@@ -159,12 +162,22 @@ export default {
   cursor: crosshair;
 }
 
+.finish-quest-one{
+  width:100%;
+  height:100%;
+  position: absolute;
+  top:0;
+  left:0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: hotpink;
+}
+
 .finish-img {
-  position: fixed;
-  top: 5%;
-  left: 30%;
-  width: 300px;
-  height: 500px;
+  width: 400px;
+  height: 600px;
 }
 
 .finish-img:hover{

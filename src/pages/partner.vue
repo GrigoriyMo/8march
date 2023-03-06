@@ -3,21 +3,27 @@
     <div class="partner_one partner" v-if="partnerId == 1">
       <h1>Таблетки для медитации "Натали+"</h1>
       <div v-if="!questOpenedOne">
-        <p> Вы пытаетесь открыть сайт партнера, но что-то идет не так и Вас переносит на Архитектурный комитет</p>
-      <button class="answer-button" v-on:click="questOpenedOne=true">Подключиться</button>
+        <p>
+          Вы пытаетесь открыть сайт партнера, но что-то идет не так и Вас
+          переносит на Архитектурный комитет
+        </p>
+        <button class="answer-button" v-on:click="questOpenedOne = true">
+          Подключиться
+        </button>
       </div>
 
       <div class="quest partner" v-if="questOpenedOne">
         <img class="artem-photo" src="/person.jpg" />
-        <button v-on:click="questOneCounter++" class="answer-button">Артем, ты не прав.</button>
+        <button v-on:click="playSound" class="answer-button">
+          Артем, ты не прав.
+        </button>
         <button class="answer-button">Дизайн говно!</button>
         <button class="answer-button">Одуванчик</button>
       </div>
 
-      <div class="finish-quest-one" v-if="questOneCounter>=3">
-        <img v-on:click="goHome" src="/one.png" alt=""/>
+      <div class="finish-quest-one" v-if="questOneCounter >= 3">
+        <img class="finish-img" v-on:click="goHome" src="/one.png" alt="" />
       </div>
-
     </div>
     <div class="partner_two partner" v-if="partnerId == 2">
       {{ partnerId }}
@@ -35,18 +41,40 @@
   </div>
 </template>
 <script>
+import soundLvl1 from "../../public/1lvl.mp3";
+import soundLvl2 from "../../public/2lvl.mp3";
+import soundLvl3 from "../../public/3lvl.mp3";
+
 export default {
   name: "Partner",
   data() {
     return {
       partnerId: 0,
-      questOpenedOne:false,
-      questOneCounter:0,
+      questOpenedOne: false,
+      questOneCounter: 0,
     };
   },
   methods: {
-    goHome(){
-        this.$router.push('/')
+    playSound() {
+      this.questOneCounter++;
+
+      var audioLvl1 = new Audio(soundLvl1);
+      var audioLvl2 = new Audio(soundLvl2);
+      var audioLvl3 = new Audio(soundLvl3);
+      switch (this.questOneCounter) {
+        case 1:
+          audioLvl1.play();
+          break;
+        case 2:
+          audioLvl2.play();
+          break;
+        case 3:
+          audioLvl3.play();
+          break;
+      }
+    },
+    goHome() {
+      this.$router.push("/");
     },
     nataliePlus() {
       document.title = `Таблетки для медитации "Натали+"`;
@@ -60,12 +88,11 @@ export default {
       alert("Отпустите ситуацию, все хорошо, просто дышите!");
     },
   },
-  watch:{
-    questOneCounter(){
-        if(this.questOneCounter>=3){
-           this.questOpenedOne= false; 
-           
-        }
+  watch: {
+    questOneCounter() {
+      if (this.questOneCounter >= 3) {
+        this.questOpenedOne = false;
+      }
     },
   },
   mounted() {
@@ -124,20 +151,23 @@ export default {
   background-color: rgb(45, 125, 210);
 }
 
-.answer-button:active{
-    background-color: rgb(169, 197, 227);
+.answer-button:active {
+  background-color: rgb(169, 197, 227);
 }
 
-.answer-button:hover{
-    cursor: crosshair;
+.answer-button:hover {
+  cursor: crosshair;
 }
 
-.finish-img{
-    position: fixed;
-    top:5%;
-    left:30%;
-    width: 500px;
-    height: 700px;;
+.finish-img {
+  position: fixed;
+  top: 5%;
+  left: 30%;
+  width: 300px;
+  height: 500px;
 }
 
+.finish-img:hover{
+  cursor: pointer;
+}
 </style>

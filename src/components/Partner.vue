@@ -20,7 +20,7 @@
         <div class="partner-card-text-opened-block">
           <p class="partner-card-p">{{ description }}</p>
           <p class="partner-card-p">{{ descriptionDetailed }}</p>
-          <span class="partner-link"> <b> <a v-bind:href="'partner/'+link"> Перейти на сайт партнера  </a> </b></span>
+          <span class="partner-link"> <b> <a v-bind:href="'partner/'+partnerLink"> Перейти на сайт партнера  </a> </b></span>
         </div>
       </div>
 
@@ -38,6 +38,15 @@ export default {
     descriptionDetailed: String,
     color: String,
     link: String,
+  },
+  computed:{
+    partnerLink(){
+      if(this.link==2){
+        return encodeURIComponent(this.link+"%253Freference%253D%D1%80%D0%B0%D1%81%D0%BA%D0%BE%D0%B4%D0%B8%D1%80%D1%83%D0%B9_%D1%8D%D1%82%D0%BE_%D0%BF%D1%80%D0%BE%D0%BC%D0%BE%D0%BA%D0%BE%D0%B4%253A%D0%BE%D0%B3%D0%BE%D0%BD%D1%8C%D0%BD%D0%B5%D0%B3%D0%BF%D0%B1%D0%BE%D0%BD%D1%83%D1%81")
+      }else{
+        return this.link
+      }
+    }
   },
   data() {
     return {
@@ -122,5 +131,6 @@ export default {
     text-decoration: none;
     color: #fff;
 }
+
 
 </style>

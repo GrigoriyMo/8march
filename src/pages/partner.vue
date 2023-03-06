@@ -13,7 +13,10 @@
       </div>
 
       <div class="quest partner" v-if="questOpenedOne">
-        <p style="font-size:20px">Архкомитет в самом разгаре. Артем покраснел от ярости и стучит по столу.</p>
+        <p style="font-size: 20px">
+          Архкомитет в самом разгаре. Артем покраснел от ярости и стучит по
+          столу.
+        </p>
         <img class="artem-photo" src="/person.jpg" />
         <button v-on:click="playSound" class="answer-button">
           Артем, ты не прав.
@@ -23,12 +26,32 @@
       </div>
 
       <div class="finish-quest-one" v-if="questOneCounter >= 3">
-        <p style="font-size:20px">Артем повержен, архкомитет - спасен</p>
+        <p style="font-size: 20px">Артем повержен, архкомитет - спасен</p>
         <img class="finish-img" v-on:click="goHome" src="/one.png" alt="" />
       </div>
     </div>
-    <div class="partner_two partner" v-if="partnerId == 2">
-      {{ partnerId }}
+    <div class="partner_two partner" v-if="partnerId.length > 1">
+      <div class="reference-ural">
+        <h2>Уникальное предложение: Канарские Уралы</h2>
+        <p style="font-size: 20px">
+          При разборе reference произошла ошибка. Backend система партнера
+          "Канарские Уралы" получила ошибку 500 от API СП.
+          <br />
+          Необходимо исправить референс и ввести его в поле ниже
+          <input class="reference-input" v-model="referenceUral" type="text" />
+          <button v-on:click="runReference">Подтвердить</button>
+          <br><br>
+          <p style="color:red">{{ referenceError }}</p>
+        </p>
+        <div v-if="referenceChecked">
+          {
+    "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJHUEIiLCJhdWQiOlsiR1BCIEVjb3N5c3RlbSJdLCJleHAiOjE2NzgyMDMyOTQsImlhdCI6MTY3ODExNjg5NCwidWlkIjoxNDE1MTQzLCJ1Z3AiOjEsInN0cCI6MCwicGlkIjo3LCJ2cm4iOjAsInNpZCI6ImFiODE1Y2I0NGZlYzU2OGFkYjI1YzRjMzY1YjA5NzRiIiwibW9kIjowLCJ1Z3MiOiIifQ.skRbcXdK8e7aTuwvEZxEnycxDd1BBNE2qYqgIekZ_cuus5MrDmAaxR4wXivPzA8seJaselKfUU2plLVy5-seolon7phJOP9oqGty_JIaYngYXMxtgZ6j2tno9IvLzqFfPyv_mELVFk02SrDMqhyjvuPizh7SPjlI8l7KcSqEeskogQbh_IG9bgHhjmhSTj3Bnst9Hmx6xf-oCS5FXHN2xrGtE2KCbQv0vS7NcbUXN750VmW-dX5CoSRb314v14dDfb0WW8sdYLhdzBaDwr3qCm0UQOc7AABIrZ93qOT66buZa7Tw9_wAIPWNT4W3qzvInJVEC4wpnNDZ69r-bHOVtw"
+}<br>
+<img class="finish-img" src="/40.jpeg" alt="">
+<button v-on:click="goHome">Клиентский путь исправлен, партнер счастлив (и Олеся)</button>
+        </div>
+
+      </div>
     </div>
     <div class="partner_three partner" v-if="partnerId == 3">
       {{ partnerId }}
@@ -54,9 +77,21 @@ export default {
       partnerId: 0,
       questOpenedOne: false,
       questOneCounter: 0,
+      referenceUral: "",
+      referenceError: "",
+      referenceChecked:false
     };
   },
   methods: {
+    runReference() {
+      if (this.referenceUral == "раскодируй_это_промокод:огоньнегпбонус") {
+        this.referenceError = "";
+        this.referenceChecked = true;
+      } else {
+        this.referenceError =
+          "Не спеши юный падаван, если не получается, попробовать снова стоит тебе...";
+      }
+    },
     playSound() {
       this.questOneCounter++;
 
@@ -162,12 +197,12 @@ export default {
   cursor: crosshair;
 }
 
-.finish-quest-one{
-  width:100%;
-  height:100%;
+.finish-quest-one {
+  width: 100%;
+  height: 100%;
   position: absolute;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -180,7 +215,17 @@ export default {
   height: 600px;
 }
 
-.finish-img:hover{
+.finish-img:hover {
   cursor: pointer;
 }
+
+.reference-ural {
+  width: 650px;
+  height: 800px;
+}
+
+.reference-input {
+  width: 500px;
+}
+
 </style>

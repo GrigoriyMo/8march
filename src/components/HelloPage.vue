@@ -2,30 +2,31 @@
 <template>
   <div class="main-wrapper">
     <h1>Точно нормальная подписка</h1>
-  <div class="auth-wrapper" v-if="authOpened">
-    <div class="auth">
-      <input v-model="phone" type="text" />
-      <button v-on:click="authorize" class="authorize-button">
-        Регистрация в подписке по номеру телефона
-      </button>
-      <p>{{ errorMessage }}</p>
+    <div class="auth-wrapper" v-if="authOpened">
+      <div class="auth">
+        <input @focus="playMusic" v-model="phone" type="text" />
+        <button v-on:click="authorize" class="authorize-button">
+          Регистрация в подписке по номеру телефона
+        </button>
+        <p>{{ errorMessage }}</p>
+      </div>
     </div>
-  </div>
-  <ul class="partner-list">
-    <li v-for="item in partners" :key="item.id">
-      <partnerCard
-        :img="item.img"
-        :title="item.name"
-        :description="item.description"
-        :descriptionDetailed="item.descriptionDetailed"
-        :color="item.color"
-        :link="item.id"
-      ></partnerCard>
-    </li>
-  </ul>
+    <ul class="partner-list">
+      <li v-for="item in partners" :key="item.id">
+        <partnerCard
+          :img="item.img"
+          :title="item.name"
+          :description="item.description"
+          :descriptionDetailed="item.descriptionDetailed"
+          :color="item.color"
+          :link="item.id"
+        ></partnerCard>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
+import ost from "../../public/hobbit.mp3";
 import partnerCard from "./Partner.vue";
 export default {
   name: "Main",
@@ -37,6 +38,7 @@ export default {
   },
   data() {
     return {
+      focused: false,
       errorMessage: "",
       phone: "+7",
       authOpened: true,
@@ -97,8 +99,12 @@ export default {
     }
   },
   methods: {
+    playMusic() {
+      var osta = new Audio(ost);
+      osta.play();
+    },
     authorize() {
-      if (this.phone.length == 12 && this.phone ==="+79123456789") {
+      if (this.phone.length == 12 && this.phone === "+79123456789") {
         this.authOpened = false;
         window.localStorage.setItem("phone", this.phone);
       } else {
@@ -110,14 +116,13 @@ export default {
 };
 </script>
 <style scoped>
-
-.main-wrapper{
+.main-wrapper {
   position: absolute;
-  left:0;
-  top:0;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
-  background-color:#48919F ;
+  background-color: #48919f;
 }
 .auth-wrapper {
   position: fixed;
@@ -129,7 +134,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #7DB938;
+  background-color: #7db938;
   background-image: url(public/welcome.png);
   background-repeat: no-repeat;
   background-position: top;
@@ -144,8 +149,8 @@ export default {
   align-items: center;
 }
 
-.authorize-button{
-  color:#fff;
+.authorize-button {
+  color: #fff;
 }
 
 .partner-list {
@@ -157,7 +162,6 @@ li {
   list-style-type: none;
 }
 
-
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -165,7 +169,7 @@ li {
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color:#66D7D1;
+  background-color: #66d7d1;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -243,7 +247,5 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
-
 }
-
 </style>

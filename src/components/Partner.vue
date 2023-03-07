@@ -2,7 +2,7 @@
   <div
     class="partner-card-wrapper"
     :style="{ backgroundColor: color }"
-    v-on:click="cardOpened = true"
+    v-on:click="openCard"
   >
     <p class="partner-card-title">
       <b>{{ title }}</b>
@@ -20,7 +20,20 @@
         <div class="partner-card-text-opened-block">
           <p class="partner-card-p">{{ description }}</p>
           <p class="partner-card-p">{{ descriptionDetailed }}</p>
-          <span class="partner-link"> <b> <a v-bind:href="'partner/'+partnerLink"> Перейти на сайт партнера  </a> </b></span>
+          <span v-if="partnerLink != 5" class="partner-link">
+            <b>
+              <a v-bind:href="'partner/' + partnerLink">
+                Перейти на сайт партнера
+              </a>
+            </b></span
+          >
+          <div
+            class="getPromocoe"
+            v-if="partnerLink == 5"
+            v-on:click="getPromocode"
+          >
+            Получить ПРОМОКОД <b> 0/5</b>
+          </div>
         </div>
       </div>
 
@@ -39,14 +52,42 @@ export default {
     color: String,
     link: String,
   },
-  computed:{
-    partnerLink(){
-      if(this.link==2){
-        return encodeURIComponent(this.link+"%253Freference%253D%D1%80%D0%B0%D1%81%D0%BA%D0%BE%D0%B4%D0%B8%D1%80%D1%83%D0%B9_%D1%8D%D1%82%D0%BE_%D0%BF%D1%80%D0%BE%D0%BC%D0%BE%D0%BA%D0%BE%D0%B4%253A%D0%BE%D0%B3%D0%BE%D0%BD%D1%8C%D0%BD%D0%B5%D0%B3%D0%BF%D0%B1%D0%BE%D0%BD%D1%83%D1%81")
-      }else{
-        return this.link
+  computed: {
+    partnerLink() {
+      if (this.link == 2) {
+        return encodeURIComponent(
+          this.link +
+            "%253Freference%253D%D1%80%D0%B0%D1%81%D0%BA%D0%BE%D0%B4%D0%B8%D1%80%D1%83%D0%B9_%D1%8D%D1%82%D0%BE_%D0%BF%D1%80%D0%BE%D0%BC%D0%BE%D0%BA%D0%BE%D0%B4%253A%D0%BE%D0%B3%D0%BE%D0%BD%D1%8C%D0%BD%D0%B5%D0%B3%D0%BF%D0%B1%D0%BE%D0%BD%D1%83%D1%81"
+        );
+      } else {
+        return this.link;
       }
-    }
+    },
+  },
+  methods: {
+    openCard() {
+      if(this.link==5){
+        if(
+        localStorage.getItem('public_ids')
+        &&
+        localStorage.getItem('postanovka')
+        &&
+        localStorage.getItem('tokenOne')
+        &&
+        localStorage.getItem('arch')
+      ){
+        this.cardOpened = true;
+      }else{
+        alert('Слева направо - сверху - вниз')
+      }
+      }else{
+        this.cardOpened = true;
+      }
+     
+    },
+    getPromocode() {
+      this.$router.push("/partner/" + this.link);
+    },
   },
   data() {
     return {
@@ -93,7 +134,6 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  
 }
 
 .partner-card-p {
@@ -106,10 +146,10 @@ export default {
   width: 640px;
   height: 60%;
   color: #403d58;
-  padding:15px;
+  padding: 15px;
 }
-.partner-card-text-opened-block{
-    padding-left: 15px;
+.partner-card-text-opened-block {
+  padding-left: 15px;
 }
 
 .partner-card-img-detailed {
@@ -122,15 +162,26 @@ export default {
   flex-direction: row;
 }
 
-.partner-link a{
-    text-decoration: none;
-    color: #fff;
+.partner-link a {
+  text-decoration: none;
+  color: #fff;
 }
 
-.partner-link a:visited{
-    text-decoration: none;
-    color: #fff;
+.partner-link a:visited {
+  text-decoration: none;
+  color: #fff;
 }
 
+.getPromocoe {
+  width: 150px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #fff;
+}
 
+.getPromocoe:hover {
+  cursor: pointer;
+}
 </style>
